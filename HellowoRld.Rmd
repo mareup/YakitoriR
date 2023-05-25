@@ -1,0 +1,100 @@
+---
+title: "HellowoRld!!"
+author: "reo"
+date: "2023/5/21"
+output: 
+    revealjs::revealjs_presentation:
+        theme: sky
+        center: true
+        css: "style.css"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 自己紹介
+
+---
+
+* [@mar_eup](https://twitter.com/mar_eup)
+* いろいろと食べ歩いてます
+
+![zhuyangnao](./img/IMG_20230506_202643.jpg)
+![zhayangnao](./img/IMG_20230506_205435.jpg)
+
+# HelloWorldしようぜ {#first}
+
+## HelloWorld {#rcode}
+
+```{r}
+print("HelloWorld")
+```
+
+表示が気になるなら
+
+```{r}
+cat("HelloWorld")
+```
+
+## これって
+
+本当にHelloWorldですか？
+
+ただ、Rの関数で表示しただけではないですか？
+
+ちゃんとHelloWorldしてみませんか？
+
+# 真のHelloWorld {#second}
+
+## C言語(はっ？) {#clang}
+
+```C
+#include <R.h>
+#include <Rdefines.h>
+#include <Rinternals.h>
+
+SEXP hello() {
+    printf("Hello World!");
+
+    return(R_NilValue);
+}
+```
+
+これだけでは動かないので、コンパイルします。
+
+```bash
+R CMD SHLIB hellowrold.c
+```
+
+これで `helloworld.so` が作られて準備OK!
+
+## HelloWorld!
+
+```{r, eval=FALSE}
+dyn.load("./helloworld.so")
+
+.Call("hello")
+
+#> NULL
+#> Hello World!
+
+(function() {
+    res <- .Call("hello")
+})()
+
+#> Hello World!
+
+```
+
+# まとめ
+
+---
+
+R言語がCで作られてること忘れてませんか？
+
+関数がCで作られてること忘れてませんか？
+
+Rで行き詰まったらCに戻りましょう
+
+## Enjoy!!
